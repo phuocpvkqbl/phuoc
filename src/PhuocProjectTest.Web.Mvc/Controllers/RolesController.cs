@@ -36,7 +36,7 @@ namespace PhuocProjectTest.Web.Controllers
         {
             var role = await _roleAppService.Get(new EntityDto(roleId));
             var permissions = (await _roleAppService.GetAllPermissions()).Items;
-            var model = new EditRoleModalViewModel
+            var model = new EditNewsModalViewModel
             {
                 Role = role,
                 Permissions = permissions

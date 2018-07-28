@@ -1,7 +1,7 @@
 ﻿(function () {
 	$(function () {
 
-		var _newsService = abp.services.app.role;
+        var _newsService = abp.services.app.news;
 		var _$modal = $('#NewsCreateModal');
 		var _$form = _$modal.find('form');
 
@@ -12,23 +12,22 @@
 			refreshRoleList();
 		});
 
-		$('.delete-role').click(function () {
-			var roleId = $(this).attr("data-role-id");
-			var roleName = $(this).attr('data-role-name');
+        $('.delete-news').click(function () {
+            var newsId = $(this).attr("data-news-id");
 
-			deleteRole(roleId, roleName);
+            deleteNews(newsId);
 		});
 
-		$('.edit-role').click(function (e) {
-			var roleId = $(this).attr("data-role-id");
+        $('.edit-news').click(function (e) {
+            var newsId = $(this).attr("data-news-id");
 
 			e.preventDefault();
 			$.ajax({
-				url: abp.appPath + 'Roles/EditRoleModal?roleId=' + roleId,
+                url: abp.appPath + 'News/EditNewsModal?newsId=' + newsId,
 				type: 'POST',
 				contentType: 'application/html',
 				success: function (content) {
-					$('#RoleEditModal div.modal-content').html(content);
+					$('#NewsEditModal div.modal-content').html(content);
 				},
 				error: function (e) { }
 			});
@@ -44,7 +43,7 @@
 			var news = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
 
 			abp.ui.setBusy(_$modal);
-			_roleService.create(role).done(function () {
+            _newsService.create(news).done(function () {
 				_$modal.modal('hide');
 				location.reload(true); //reload page to see new role!
 			}).always(function () {
@@ -60,13 +59,13 @@
 			location.reload(true); //reload page to see new role!
 		}
 
-		function deleteRole(roleId, roleName) {
+		function deleteNews(newsId) {
 			abp.message.confirm(
-                abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'PhuocProjectTest'), roleName),
+                abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'PhuocProjectTest'), ""),
 				function (isConfirmed) {
 					if (isConfirmed) {
-						_roleService.delete({
-							id: roleId
+						_newsService.delete({
+                            id: newsId
 						}).done(function () {
 							refreshRoleList();
 						});

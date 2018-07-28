@@ -7,6 +7,7 @@ using PhuocProjectTest.Controllers;
 using PhuocProjectTest.Users;
 using PhuocProjectTest.Web.Models.Users;
 using PhuocProjectTest.New;
+using PhuocProjectTest.Web.Models.News;
 
 namespace PhuocProjectTest.Web.Controllers
 {
@@ -23,20 +24,22 @@ namespace PhuocProjectTest.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var model = (await _newAppService.GetAll(new PagedResultRequestDto {MaxResultCount = int.MaxValue})).Items; // Paging not implemented yet
+            var news = (await _newAppService.GetAll(new PagedResultRequestDto {MaxResultCount = int.MaxValue})).Items; // Paging not implemented yet
+            var model = new NewsListViewModel
+            {
+                News = news
+            };
             return View(model);
         }
 
-        //public async Task<ActionResult> EditUserModal(long userId)
-        //{
-        //    var user = await _userAppService.Get(new EntityDto<long>(userId));
-        //    var roles = (await _userAppService.GetRoles()).Items;
-        //    var model = new EditUserModalViewModel
-        //    {
-        //        User = user,
-        //        Roles = roles
-        //    };
-        //    return View("_EditUserModal", model);
-        //}
+        public async Task<ActionResult> EditNewsModal(int newsId)
+        {
+            var news = await _newAppService.Get(new EntityDto<int>(newsId));
+            var model = new EditNewsModalViewModel
+            {
+                News = news
+            };
+            return View("_EditNewsModal", model);
+        }
     }
 }

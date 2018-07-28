@@ -1,8 +1,8 @@
 ﻿(function ($) {
 
-    var _roleService = abp.services.app.role;
-    var _$modal = $('#RoleEditModal');
-    var _$form = $('form[name=RoleEditForm]');
+    var _newsService = abp.services.app.news;
+    var _$modal = $('#NewsEditModal');
+    var _$form = $('form[name=NewsEditForm]');
 
     function save() {
 
@@ -10,18 +10,10 @@
             return;
         }
 
-        var role = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
-        role.permissions = [];
-        var _$permissionCheckboxes = $("input[name='permission']:checked:visible");
-        if (_$permissionCheckboxes) {
-            for (var permissionIndex = 0; permissionIndex < _$permissionCheckboxes.length; permissionIndex++) {
-                var _$permissionCheckbox = $(_$permissionCheckboxes[permissionIndex]);
-                role.permissions.push(_$permissionCheckbox.val());
-            }
-        }
+        var news = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
         
         abp.ui.setBusy(_$form);
-        _roleService.update(role).done(function () {
+        _newService.update(news).done(function () {
             _$modal.modal('hide');
             location.reload(true); //reload page to see edited role!
         }).always(function () {

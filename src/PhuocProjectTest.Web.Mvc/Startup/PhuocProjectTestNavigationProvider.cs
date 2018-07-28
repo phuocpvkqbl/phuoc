@@ -45,7 +45,7 @@ namespace PhuocProjectTest.Web.Startup
                         requiredPermissionName: PermissionNames.Pages_Roles
                     )
                 ).AddItem(new MenuItemDefinition(
-                        PageNames.Roles,
+                        PageNames.News,
                         L("News"),
                         url: "News",
                         icon: "local_offer",

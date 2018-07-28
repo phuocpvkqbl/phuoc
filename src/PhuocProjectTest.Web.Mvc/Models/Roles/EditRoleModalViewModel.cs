@@ -4,7 +4,7 @@ using PhuocProjectTest.Roles.Dto;
 
 namespace PhuocProjectTest.Web.Models.Roles
 {
-    public class EditRoleModalViewModel
+    public class EditNewsModalViewModel
     {
         public RoleDto Role { get; set; }
 

@@ -95,5 +95,7 @@
     <text name="Title" value="Title" />
     <text name="Content" value="Content" />
     <text name="CreateNewNews" value="Create News" />
+    <text name="EditNews">Edit News</text>
+
   </texts>
 </localizationDictionary>
